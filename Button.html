@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ko" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>버튼</title>
+  </head>
+  <body>
+    <canvas id="canvas" style=" background-color: cyan;" width="1000" height="800"></canvas>
+    <script>
+      var canvas = document.getElementById('canvas');
+      var ctx = canvas.getContext('2d');
+
+      var x;
+      var y;
+      var click = 0;
+
+      canvas.onmousemove = function(event){
+        x = event.clientX - ctx.canvas.offsetLeft;
+        y = event.clientY - ctx.canvas.offsetTop;
+      }
+
+      var Button(300,300,400,200);
+
+      Button {
+        ctx.fillStyle = 'pink';
+        ctx.fillRect(300, 300, 400, 200);
+
+        buttonUpdate (){
+          if (300 <= x && x <= 700)&&(300 <= y && y <= 500) {
+              ctx.fillStyle = 'black';
+              ctx.fillRect(300, 300, 400, 200);
+          }
+          else if (300 >= x && x >= 700)&&(300 >= y && y >= 500){
+            ctx.clearRect(0,0,1000,800);
+            ctx.fillStyle = 'pink';
+            ctx.fillRect(300, 300, 400, 200);
+          }
+        }
+
+        buttonClick (){
+          if (300 <= x && x <= 700)&&(300 <= y && y <= 500) {
+              ctx.fillStyle = 'magenta';
+              ctx.fillRect(300, 300, 400, 200);
+          }
+        }
+      }
+
+    </script>
+  </body>
+</html>
