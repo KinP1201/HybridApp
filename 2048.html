@@ -7,21 +7,36 @@
     <script src="https://unpkg.com/vue@3"></script>
     <style>
         #back{
-            background-color: cyan; width: 500px; height: 500px;
+            position: relative;
+            background-color: black; width: 590px; height: 590px;
             display: grid; 
             grid-template-columns: 1fr 1fr 1fr 1fr;
             grid-template-rows: 1fr 1fr 1fr 1fr;
-            grid-gap: 5px;
-            padding: 5px;
-            margin: auto; margin-top: 100px;
+            grid-gap: 10px;
+            padding: 10px;
         }
         .act{
-            background-color: magenta; border-radius: 10px;
+            background-color: white; border-radius: 10px;
+        }
+        .pref{
+            position: absolute;
+            background-color: grey;
+            width: 120px; height: 120px;
+            left: 20px; top: 20px;
+            font-size: 60px;
+            text-align: center;
+            border-radius: 15px;;
         }
     </style>
-    <div id="back">
-        <div class="act" v-for="index in act_count">{{index}}</div>
-    </div>
+
+    <center>
+        <div id="back">
+            <div class="act" v-for="index in act_count">
+            </div>
+            <div class="pref">2</div>
+        </div>
+
+    </center>
 
     <script>
         const {createApp} = Vue;
@@ -32,6 +47,47 @@
                 }
             }
         }).mount("#back");
+        
+        //window.onkeydown = (e) => console.log(e);
+
+        function keyDownHandler(e) {
+            if(e.key == 37 || e.key == "ArrowRight") {
+                document.getElementsByClassName("pref").style.left = "470px";
+            }
+            else if(e.key == 39 || e.key == "ArrowLeft") {
+                
+                document.getElementsByClassName("pref").style.left = "20px";
+            }
+            else if(e.key == 38 || e.key == "ArrowUp") {
+                
+                document.getElementsByClassName("pref").style.top = "20px";
+            }
+            else if(e.key == 40 || e.key == "ArrowDown") {
+                keyArrowDown();
+                document.getElementsByClassName("pref").style.top = "470px";
+            }
+        }
+
+        function keyArrowUp(e){
+            document.getElementsByClassName("pref").style.top = "20px";
+        }
+        
+        function keyArrowDown(e){
+            document.getElementsByClassName("pref").style.top = "470px";
+        }
+
+        function keyArrowLeft(e){
+            document.getElementsByClassName("pref").style.left = "20px";
+        }
+
+        function keyArrowRight(e){
+            document.getElementsByClassName("pref").style.left = "470px";
+        }
+
+        function keylog(e) {
+            console.log(e);
+        }
+        window.onkeydown = keylog;
     </script>
 </body>
 </html>
