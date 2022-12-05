@@ -1,93 +1,208 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Document</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2048</title>
+    <style>
+        .total{
+            margin: auto;
+            margin-top: 200px;
+            width: 450px;
+        }
+        
+        .pref{
+            width: 100px; height: 100px;
+            background-color: cyan;
+            border: 2px solid blue;
+            border-radius: 10px;
+            text-align: center; vertical-align: center;
+            font-size: 18pt; font-weight: bold;
+            margin-right: 2px; margin-bottom: 2px;
+            float: left; 
+        }
+
+    </style>
 </head>
 <body>
-    <script src="https://unpkg.com/vue@3"></script>
-    <style>
-        #back{
-            position: relative;
-            background-color: black; width: 590px; height: 590px;
-            display: grid; 
-            grid-template-columns: 1fr 1fr 1fr 1fr;
-            grid-template-rows: 1fr 1fr 1fr 1fr;
-            grid-gap: 10px;
-            padding: 10px;
-        }
-        .act{
-            background-color: white; border-radius: 10px;
-        }
-        .pref{
-            position: absolute;
-            background-color: grey;
-            width: 120px; height: 120px;
-            left: 20px; top: 20px;
-            font-size: 60px;
-            text-align: center;
-            border-radius: 15px;;
-        }
-    </style>
-
-    <center>
-        <div id="back">
-            <div class="act" v-for="index in act_count">
-            </div>
-            <div class="pref">2</div>
-        </div>
-
-    </center>
-
+    <div class="total">
+        <div class = "pref" id="P01"></div> <div class = "pref" id="P02"></div> <div class = "pref" id="P03"></div> <div class = "pref" id="P04"></div>
+        <div class = "pref" id="P05"></div> <div class = "pref" id="P06"></div> <div class = "pref" id="P07"></div> <div class = "pref" id="P08"></div>
+        <div class = "pref" id="P09"></div> <div class = "pref" id="P10"></div> <div class = "pref" id="P11"></div> <div class = "pref" id="P12"></div>
+        <div class = "pref" id="P13"></div> <div class = "pref" id="P14"></div> <div class = "pref" id="P15"></div> <div class = "pref" id="P16"></div>
+    </div>
     <script>
-        const {createApp} = Vue;
-        createApp({
-            data(){
-                return {
-                    act_count : 16,
+        var board = Array(Array(0,0,0,0),Array(0,0,0,0),Array(0,0,0,0),Array(0,0,0,0));
+        var tableID = Array(Array("P01", "P02", "P03", "P04"), Array("P05", "P06", "P07", "P08"), Array("P09", "P10", "P11", "P12"), Array("P13", "P14", "P15", "P16"));
+
+        document.onkeydown = keyDownEventHandler;
+        function keyDownEventHandler(e) {
+            switch (e.keyCode) {
+                case 38: moveDir(0); break; //up
+                case 40: moveDir(1); break; //down
+                case 37: moveDir(2); break; //left
+                case 39: moveDir(3); break; //right
+            }
+        }
+
+        //초기설정
+        init();
+        function init() {
+            for (var i = 0; i < 4; i++)
+                for (var j = 0; j < 4; j++)
+                    board[i][j] = 0;
+            for (var i = 0; i < 2; i++) {
+                var rand = parseInt(Math.random() * 16);
+                var y = parseInt(rand / 4);
+                var x = rand % 4;
+                if (board[y][x] == 0) board[y][x] = getNewNum();
+                else i--;
+            }
+            update();
+        }
+
+        // 게임 화면 업데이트
+        function update() {
+            for (var i = 0; i < 4; i++) {
+                for (var j = 0; j < 4; j++) {
+                    var cell = document.getElementById(tableID[i][j]);
+                    cell.innerHTML = board[i][j] == 0 ? "" : board[i][j];
                 }
             }
-        }).mount("#back");
+        }
+
         
-        //window.onkeydown = (e) => console.log(e);
 
-        function keyDownHandler(e) {
-            if(e.key == 37 || e.key == "ArrowRight") {
-                document.getElementsByClassName("pref").style.left = "470px";
+        // 보드판 이동 방향에 따른 회전 컨트롤
+        function moveDir(opt) {
+            switch (opt) {
+                case 0: move(); break; //up
+                case 1: rotate(2); move(); rotate(2); break; //down
+                case 2: rotate(1); move(); rotate(3); break; //left
+                case 3: rotate(3); move(); rotate(1); break; //right
             }
-            else if(e.key == 39 || e.key == "ArrowLeft") {
-                
-                document.getElementsByClassName("pref").style.left = "20px";
+            update();
+        }
+
+        // 보드판 회전
+        function rotate(n) {
+            while (n--) {
+                var tempBoard = Array(Array(0, 0, 0, 0), Array(0, 0, 0, 0), Array(0, 0, 0, 0), Array(0, 0, 0, 0));
+                for (var i = 0; i < 4; i++)
+                    for (var j = 0; j < 4; j++)
+                        tempBoard[i][j] = board[i][j];
+                for (var i = 0; i < 4; i++)
+                    for (var j = 0; j < 4; j++)
+                        board[j][3 - i] = tempBoard[i][j];
+
             }
-            else if(e.key == 38 || e.key == "ArrowUp") {
-                
-                document.getElementsByClassName("pref").style.top = "20px";
+        }
+
+        // 보드판 이동
+        function move() {
+            var isMoved = false;
+            var isPlused = Array(Array(0, 0, 0, 0), Array(0, 0, 0, 0), Array(0, 0, 0, 0), Array(0, 0, 0, 0));
+            for (var i = 1; i < 4; i++) {
+                for (var j = 0; j < 4; j++) {
+                    if (board[i][j] == 0) continue;
+                    var tempY = i - 1;
+                    while (tempY > 0 && board[tempY][j] == 0) tempY--;
+                    if (board[tempY][j] == 0) {
+                        board[tempY][j] = board[i][j];
+                        board[i][j] = 0;
+                        isMoved = true;
+                    }
+                    else if (board[tempY][j] != board[i][j]) {
+                        if (tempY + 1 == i) continue;
+                        board[tempY + 1][j] = board[i][j];
+                        board[i][j] = 0;
+                        isMoved = true;
+                    }
+                    else {
+                        if (isPlused[tempY][j] == 0) {
+                            board[tempY][j] *= 2;
+                            board[i][j] = 0;
+                            isPlused[tempY][j] = 1;
+                            isMoved = true;
+                        }
+                        else {
+                            board[tempY + 1][j] = board[i][j];
+                            board[i][j] = 0;
+                            isMoved = true;
+                        }
+                    }
+                }
             }
-            else if(e.key == 40 || e.key == "ArrowDown") {
-                keyArrowDown();
-                document.getElementsByClassName("pref").style.top = "470px";
+            if (isMoved) generate();
+            else checkGameOver();
+        }
+
+        // 신규 숫자 생성
+        function generate() {
+            var zeroNum = 0;
+            for (var i = 0; i < 4; i++)
+                for (var j = 0; j < 4; j++)
+                    if (board[i][j] == 0)
+                        zeroNum++;
+            while (true) {
+                for (var i = 0; i < 4; i++) {
+                    for (var j = 0; j < 4; j++) {
+                        if (board[i][j] == 0) {
+                            var rand = parseInt(Math.random() * zeroNum);
+                            if (rand == 0) {
+                                board[i][j] = getNewNum();
+                                return;
+                            }
+                        }
+                    }
+                }
             }
         }
 
-        function keyArrowUp(e){
-            document.getElementsByClassName("pref").style.top = "20px";
-        }
-        
-        function keyArrowDown(e){
-            document.getElementsByClassName("pref").style.top = "470px";
-        }
-
-        function keyArrowLeft(e){
-            document.getElementsByClassName("pref").style.left = "20px";
+        // 숫자 생성 확률
+        function getNewNum() {
+            var rand = parseInt(Math.random() * 10);
+            if (rand == 0) return 4;
+            return 2;
         }
 
-        function keyArrowRight(e){
-            document.getElementsByClassName("pref").style.left = "470px";
+        // 최대 점수 반환
+        function getMaxNum() {
+            var ret = 0;
+            for (var i = 0; i < 4; i++)
+                for (var j = 0; j < 4; j++)
+                    if (board[i][j] > ret)
+                        ret = board[i][j];
+            return ret;
         }
 
-        function keylog(e) {
-            console.log(e);
+        // 게임오버 체크
+        function checkGameOver() {
+            for (var i = 0; i < 4; i++) {
+                var colCheck = board[i][0];
+                if (colCheck == 0) return;
+                for (var j = 1; j < 4; j++) {
+                    if (board[i][j] == colCheck || board[i][j] == 0) return;
+                    else colCheck = board[i][j];
+                }
+            }
+            for (var i = 0; i < 4; i++) {
+                var rowCheck = board[0][i];
+                if (rowCheck == 0) return;
+                for (var j = 1; j < 4; j++) {
+                    if (board[j][i] == rowCheck || board[j][i] == 0) return;
+                    else rowCheck = board[j][i];
+                }
+            }
+            gameover();
         }
-        window.onkeydown = keylog;
+
+        // 게임오버 처리
+        function gameover() {
+            alert("[Game Over]");
+            init();
+        }
     </script>
 </body>
 </html>
