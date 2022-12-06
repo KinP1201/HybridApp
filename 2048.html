@@ -8,17 +8,29 @@
     <style>
         .total{
             margin: auto;
-            margin-top: 200px;
-            width: 450px;
+            margin-top: 150px;
+            width: 425px;
         }
-        
+        .title{
+            font-size: 45pt; font-style: bold;
+            height: 80px; width: 130px;
+            background-color: aquamarine;
+            float: left;
+        }
+        #score{
+            height: 80px; width: 295px;
+            font-size: 30pt; font-style: bold;
+            float: left; text-align: right;
+            line-height: 75px;
+        }
         .pref{
             width: 100px; height: 100px;
             background-color: cyan;
             border: 2px solid blue;
             border-radius: 10px;
-            text-align: center; vertical-align: center;
-            font-size: 18pt; font-weight: bold;
+            text-align: center; 
+            line-height: 95px;
+            font-size: 25pt; font-weight: bold;
             margin-right: 2px; margin-bottom: 2px;
             float: left; 
         }
@@ -27,6 +39,7 @@
 </head>
 <body>
     <div class="total">
+        <div class="title">2048</div> <div id="score">0</div>
         <div class = "pref" id="P01"></div> <div class = "pref" id="P02"></div> <div class = "pref" id="P03"></div> <div class = "pref" id="P04"></div>
         <div class = "pref" id="P05"></div> <div class = "pref" id="P06"></div> <div class = "pref" id="P07"></div> <div class = "pref" id="P08"></div>
         <div class = "pref" id="P09"></div> <div class = "pref" id="P10"></div> <div class = "pref" id="P11"></div> <div class = "pref" id="P12"></div>
@@ -52,13 +65,18 @@
             for (var i = 0; i < 4; i++)
                 for (var j = 0; j < 4; j++)
                     board[i][j] = 0;
-            for (var i = 0; i < 2; i++) {
+            
                 var rand = parseInt(Math.random() * 16);
+                var rand2 = parseInt(Math.random() * 16);
                 var y = parseInt(rand / 4);
                 var x = rand % 4;
-                if (board[y][x] == 0) board[y][x] = getNewNum();
-                else i--;
-            }
+                var y2 = parseInt(rand2 / 4);
+                var x2 = rand2 % 4;
+                var rand3 = parseInt(Math.random() * 3);
+                if (rand3==0){board[y][x] = 2;}
+                else if(rand3==1){board[y][x] = 4;} 
+                else {board[y][x] = 2; board[y2][x2] = 4;}
+            
             update();
         }
 
@@ -68,19 +86,85 @@
                 for (var j = 0; j < 4; j++) {
                     var cell = document.getElementById(tableID[i][j]);
                     cell.innerHTML = board[i][j] == 0 ? "" : board[i][j];
+                    coloring(cell);
                 }
             }
         }
 
-        
+        function coloring(cell){
+            var cellNum = parseInt(cell.innerHTML);
+            switch(cellNum){
+                case 0:
+                case 2:
+                    cell.style.color="black";
+                    cell.style.background="cyan";
+                    break;
+                case 4:
+                    cell.style.color="black";
+                    cell.style.background="deepskyblue";
+                    break;
+                case 8:
+                    cell.style.color="black";
+                    cell.style.background="dodgerblue";
+                    break;
+                case 16:
+                    cell.style.color="black";
+                    cell.style.background="cornflowerblue";
+                    break;
+                case 32:
+                    cell.style.color="black";
+                    cell.style.background="royalblue";
+                    break;
+                case 64:
+                    cell.style.color="white";
+                    cell.style.background="blue";
+                    break;
+                case 128:
+                    cell.style.color="white";
+                    cell.style.background="mediumblue";
+                    break;
+                case 256:
+                    cell.style.color="white";
+                    cell.style.background="navy";
+                    break;
+                case 512:
+                    cell.style.color="white";
+                    cell.style.background="darkblue";
+                    break;
+                case 1024:
+                    cell.style.color="white";
+                    cell.style.background="midnightblue";
+                    break;
+                case 2048:
+                    cell.style.color="white";
+                    cell.style.background="darkslateblue";
+                    break;
+                default:
+                    if(cellNum>2048){
+                        cell.style.color="white";
+                        cell.style.background="violet";
+                    }
+                    else{
+                        cell.style.color="palegreen";
+                        cell.style.background="palegreen";
+                    }
+                    break;
+            }
+        }
+
+        var count = 0;
+        function plus()  {
+            document.getElementById('score').innerText = count;
+            count=count+1;
+        }
 
         // 보드판 이동 방향에 따른 회전 컨트롤
         function moveDir(opt) {
             switch (opt) {
                 case 0: move(); break; //up
-                case 1: rotate(2); move(); rotate(2); break; //down
-                case 2: rotate(1); move(); rotate(3); break; //left
-                case 3: rotate(3); move(); rotate(1); break; //right
+                case 1: rotate(2); move(); rotate(2);  break; //down
+                case 2: rotate(1); move(); rotate(3);  break; //left
+                case 3: rotate(3); move(); rotate(1);  break; //right
             }
             update();
         }
@@ -151,20 +235,14 @@
                         if (board[i][j] == 0) {
                             var rand = parseInt(Math.random() * zeroNum);
                             if (rand == 0) {
-                                board[i][j] = getNewNum();
+                                board[i][j] = 2;
+                                plus();
                                 return;
                             }
                         }
                     }
                 }
             }
-        }
-
-        // 숫자 생성 확률
-        function getNewNum() {
-            var rand = parseInt(Math.random() * 10);
-            if (rand == 0) return 4;
-            return 2;
         }
 
         // 최대 점수 반환
