@@ -3,20 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>오리외꽉꽉 | Portfolio</title>
+  <title>강인표 | Portfolio</title>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg:        #0d1117;
-      --surface:   #161b22;
-      --surface2:  #21262d;
-      --accent:    #58a6ff;
-      --accent2:   #79c0ff;
-      --green:     #3fb950;
-      --text:      #e6edf3;
-      --muted:     #8b949e;
-      --border:    #30363d;
+      --bg:       #0d1117;
+      --surface:  #161b22;
+      --surface2: #21262d;
+      --accent:   #58a6ff;
+      --accent2:  #79c0ff;
+      --text:     #e6edf3;
+      --muted:    #8b949e;
+      --border:   #30363d;
+      --green:    #3fb950;
     }
 
     html { scroll-behavior: smooth; }
@@ -34,38 +34,19 @@
       height: 56px;
       display: flex; align-items: center; justify-content: space-between;
       padding: 0 2rem;
-      background: rgba(13,17,23,0.88);
+      background: rgba(13,17,23,0.9);
       backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border);
     }
-    .nav-logo {
-      font-weight: 700; font-size: 1rem; color: var(--accent);
-      letter-spacing: 0.02em;
-    }
-    nav ul { list-style: none; display: flex; gap: 1.75rem; }
-    nav a {
-      color: var(--muted); text-decoration: none;
-      font-size: 0.875rem; transition: color .2s;
-    }
+    .nav-logo { font-weight: 700; font-size: 1rem; color: var(--accent); }
+    nav ul { list-style: none; display: flex; gap: 1.6rem; }
+    nav a { color: var(--muted); text-decoration: none; font-size: 0.85rem; transition: color .2s; }
     nav a:hover { color: var(--text); }
 
-    /* ── LAYOUT ── */
-    .wrapper {
-      max-width: 860px;
-      margin: 0 auto;
-      padding: 0 2rem;
-    }
-
-    section {
-      padding: 5.5rem 0;
-    }
-
-    hr.divider {
-      border: none;
-      border-top: 1px solid var(--border);
-      max-width: 860px;
-      margin: 0 auto;
-    }
+    /* ── WRAPPER ── */
+    .wrap { max-width: 860px; margin: 0 auto; padding: 0 2rem; }
+    section { padding: 5.5rem 0; }
+    hr.div { border: none; border-top: 1px solid var(--border); max-width: 860px; margin: 0 auto; }
 
     /* ── HERO ── */
     .hero {
@@ -73,195 +54,151 @@
       display: flex; flex-direction: column; justify-content: center;
       padding-top: 56px;
     }
-
     .eyebrow {
-      font-size: 0.75rem; letter-spacing: 0.14em;
-      text-transform: uppercase; color: var(--accent);
-      margin-bottom: 1.2rem;
+      font-size: 0.72rem; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--accent); margin-bottom: 1.2rem;
     }
-
     .hero h1 {
-      font-size: clamp(2.4rem, 6vw, 4.2rem);
-      font-weight: 800; line-height: 1.1;
-      margin-bottom: 1.4rem;
+      font-size: clamp(2.6rem, 6vw, 4.4rem);
+      font-weight: 800; line-height: 1.08; margin-bottom: 1.4rem;
     }
-    .hero h1 .name { color: var(--accent); }
-
+    .hero h1 .hl { color: var(--accent); }
     .hero .sub {
-      font-size: 1.15rem; color: var(--muted);
-      max-width: 580px; margin-bottom: 2.25rem;
+      font-size: 1.1rem; color: var(--muted);
+      max-width: 580px; margin-bottom: 2.2rem; line-height: 1.75;
     }
-
     .chip-row { display: flex; flex-wrap: wrap; gap: 0.45rem; margin-bottom: 2.5rem; }
     .chip {
-      padding: 0.3rem 0.85rem; border-radius: 20px;
-      border: 1px solid #1f6feb66;
-      background: #1f6feb18;
-      color: var(--accent2); font-size: 0.8rem; font-weight: 500;
+      padding: 0.28rem 0.85rem; border-radius: 20px;
+      border: 1px solid #1f6feb66; background: #1f6feb18;
+      color: var(--accent2); font-size: 0.78rem; font-weight: 500;
     }
-
     .scroll-cue {
       color: var(--accent); font-size: 0.85rem; text-decoration: none;
-      display: inline-flex; align-items: center; gap: 0.4rem;
-      opacity: .7; transition: opacity .2s;
+      opacity: .65; transition: opacity .2s;
     }
     .scroll-cue:hover { opacity: 1; }
 
-    /* ── SECTION HEADER ── */
+    /* ── SECTION LABEL ── */
     .sec-label {
       font-size: 0.7rem; letter-spacing: 0.14em;
-      text-transform: uppercase; color: var(--accent);
-      margin-bottom: 0.4rem;
+      text-transform: uppercase; color: var(--accent); margin-bottom: 0.4rem;
     }
-    h2 {
-      font-size: 1.85rem; font-weight: 700;
-      margin-bottom: 2.25rem;
-    }
-    h3 { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.4rem; }
+    h2 { font-size: 1.8rem; font-weight: 700; margin-bottom: 2rem; }
+    h3 { font-size: 1.05rem; font-weight: 600; margin-bottom: 0.35rem; }
 
-    /* ── CARDS ── */
+    /* ── CARD ── */
     .card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 1.6rem 1.75rem;
-      margin-bottom: 1.1rem;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; padding: 1.5rem 1.75rem; margin-bottom: 1rem;
       transition: border-color .25s, transform .25s;
     }
     .card:hover { border-color: var(--accent); transform: translateY(-2px); }
-
-    .card-meta {
-      font-size: 0.78rem; color: var(--muted);
-      margin-bottom: 0.5rem; letter-spacing: 0.02em;
-    }
-    .card p { color: var(--muted); font-size: 0.93rem; line-height: 1.72; }
+    .card-meta { font-size: 0.76rem; color: var(--muted); margin-bottom: 0.5rem; }
+    .card p { color: var(--muted); font-size: 0.92rem; line-height: 1.72; }
     .card .chip-row { margin-top: 1rem; margin-bottom: 0; }
 
-    /* ── SKILLS GRID ── */
+    /* ── SKILLS ── */
     .skills-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(185px, 1fr));
       gap: 1rem;
     }
     .skill-box {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 1.1rem 1.4rem;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 10px; padding: 1.1rem 1.35rem;
     }
     .skill-box h4 {
-      font-size: 0.7rem; text-transform: uppercase;
-      letter-spacing: 0.1em; color: var(--muted);
-      margin-bottom: 0.7rem;
+      font-size: 0.68rem; text-transform: uppercase;
+      letter-spacing: 0.1em; color: var(--muted); margin-bottom: 0.65rem;
     }
     .skill-box ul { list-style: none; }
     .skill-box li {
-      font-size: 0.93rem; padding: 0.22rem 0;
-      display: flex; align-items: center; gap: 0.5rem;
+      font-size: 0.9rem; padding: 0.2rem 0;
+      display: flex; align-items: center; gap: 0.45rem;
     }
-    .skill-box li::before {
-      content: '▸'; color: var(--accent); font-size: 0.65rem;
-    }
+    .skill-box li::before { content: '▸'; color: var(--accent); font-size: 0.62rem; }
 
     /* ── TIMELINE ── */
-    .timeline { position: relative; padding-left: 1.25rem; }
+    .timeline { position: relative; padding-left: 1.2rem; }
     .timeline::before {
       content: ''; position: absolute;
-      left: 0; top: 6px; bottom: 6px;
+      left: 0; top: 8px; bottom: 8px;
       width: 1px; background: var(--border);
     }
     .tl-item { position: relative; padding: 0 0 2rem 1.5rem; }
+    .tl-item:last-child { padding-bottom: 0; }
     .tl-item::before {
-      content: '';
-      position: absolute; left: -1.25rem; top: 7px;
+      content: ''; position: absolute;
+      left: -1.2rem; top: 7px;
       width: 7px; height: 7px; border-radius: 50%;
       background: var(--accent);
       border: 2px solid var(--bg);
       box-shadow: 0 0 0 2px var(--accent);
     }
-    .tl-item p { color: var(--muted); font-size: 0.9rem; margin-top: 0.25rem; }
+    .tl-item p { color: var(--muted); font-size: 0.88rem; margin-top: 0.2rem; }
+    .tl-date { font-size: 0.75rem; color: var(--muted); margin-top: 0.2rem; }
 
     /* ── VALUES ── */
     .values-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(195px, 1fr));
       gap: 1rem;
     }
     .value-box {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 1.25rem 1.4rem;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 10px; padding: 1.2rem 1.4rem;
     }
-    .value-box .icon { font-size: 1.6rem; margin-bottom: 0.5rem; }
-    .value-box h4 { font-size: 1rem; font-weight: 600; margin-bottom: 0.25rem; }
-    .value-box p { color: var(--muted); font-size: 0.85rem; line-height: 1.55; }
+    .value-box .icon { font-size: 1.55rem; margin-bottom: 0.45rem; }
+    .value-box h4 { font-size: 0.98rem; font-weight: 600; margin-bottom: 0.2rem; }
+    .value-box p { color: var(--muted); font-size: 0.83rem; line-height: 1.55; }
 
-    /* ── GOAL HIGHLIGHT ── */
+    /* ── GOAL ── */
     .goal-hero {
       background: linear-gradient(135deg, #1f6feb1a 0%, #58a6ff0d 100%);
-      border: 1px solid #1f6feb55;
-      border-radius: 14px;
-      padding: 2.5rem 2rem;
-      text-align: center;
-      margin-bottom: 1.2rem;
+      border: 1px solid #1f6feb55; border-radius: 14px;
+      padding: 2.4rem 2rem; text-align: center; margin-bottom: 1.1rem;
     }
-    .goal-hero .big-icon { font-size: 2.8rem; margin-bottom: 1rem; }
-    .goal-hero h3 { font-size: 1.4rem; margin-bottom: 0.6rem; }
-    .goal-hero p { color: var(--muted); max-width: 520px; margin: 0 auto; font-size: 0.95rem; }
-
-    .goal-pair {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;
-    }
+    .goal-hero .big-icon { font-size: 2.6rem; margin-bottom: 0.9rem; }
+    .goal-hero h3 { font-size: 1.35rem; margin-bottom: 0.55rem; }
+    .goal-hero p { color: var(--muted); max-width: 520px; margin: 0 auto; font-size: 0.93rem; }
+    .goal-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
 
     /* ── QUOTE ── */
     blockquote {
       border-left: 3px solid var(--accent);
       padding: 1rem 1.5rem;
-      background: var(--surface);
-      border-radius: 0 8px 8px 0;
-      color: var(--muted);
-      font-style: italic;
-      margin: 1.5rem 0;
-      font-size: 0.93rem;
-      line-height: 1.7;
+      background: var(--surface); border-radius: 0 8px 8px 0;
+      color: var(--muted); font-style: italic;
+      margin: 1.5rem 0; font-size: 0.91rem; line-height: 1.72;
     }
 
-    /* ── ABOUT PERSONALITY ── */
-    .personality-row {
-      display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.5rem;
-    }
+    /* ── TRAIT CHIPS ── */
+    .trait-row { display: flex; flex-wrap: wrap; gap: 0.45rem; margin-top: 0.5rem; }
     .trait {
-      display: inline-flex; align-items: center; gap: 0.4rem;
-      padding: 0.35rem 0.9rem; border-radius: 20px;
-      border: 1px solid var(--border);
-      background: var(--surface2);
-      font-size: 0.83rem; color: var(--text);
+      display: inline-flex; align-items: center; gap: 0.35rem;
+      padding: 0.32rem 0.88rem; border-radius: 20px;
+      border: 1px solid var(--border); background: var(--surface2);
+      font-size: 0.8rem; color: var(--text);
     }
+
+    /* ── REVEAL ── */
+    .reveal { opacity: 0; transform: translateY(16px); transition: opacity .55s ease, transform .55s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
 
     /* ── FOOTER ── */
     footer {
-      text-align: center;
-      padding: 3rem 2rem;
-      color: var(--muted);
-      font-size: 0.83rem;
+      text-align: center; padding: 3rem 2rem;
+      color: var(--muted); font-size: 0.82rem;
       border-top: 1px solid var(--border);
     }
-    footer span { display: block; margin-top: 0.4rem; font-size: 0.75rem; opacity: .6; }
-
-    /* ── SCROLL REVEAL ── */
-    .reveal {
-      opacity: 0;
-      transform: translateY(18px);
-      transition: opacity .55s ease, transform .55s ease;
-    }
-    .reveal.visible { opacity: 1; transform: none; }
+    footer small { display: block; margin-top: 0.4rem; opacity: .55; font-size: 0.74rem; }
 
     /* ── RESPONSIVE ── */
     @media (max-width: 620px) {
       nav ul { display: none; }
       .goal-pair { grid-template-columns: 1fr; }
-      .hero h1 { font-size: 2.2rem; }
+      .hero h1 { font-size: 2.3rem; }
     }
   </style>
 </head>
@@ -269,22 +206,23 @@
 
 <!-- NAV -->
 <nav>
-  <span class="nav-logo">🦆 오리외꽉꽉</span>
+  <span class="nav-logo">강인표</span>
   <ul>
     <li><a href="#about">소개</a></li>
     <li><a href="#skills">기술</a></li>
-    <li><a href="#project">프로젝트</a></li>
+    <li><a href="#projects">프로젝트</a></li>
     <li><a href="#experience">경험</a></li>
+    <li><a href="#education">교육</a></li>
     <li><a href="#values">관심사</a></li>
     <li><a href="#goals">목표</a></li>
   </ul>
 </nav>
 
 <!-- HERO -->
-<div class="wrapper">
+<div class="wrap">
   <div class="hero">
-    <p class="eyebrow">Portfolio · Game Content</p>
-    <h1>안녕하세요,<br><span class="name">오리외꽉꽉</span>입니다.</h1>
+    <p class="eyebrow">Portfolio · Computer Science · Game Content</p>
+    <h1>안녕하세요,<br><span class="hl">강인표</span>입니다.</h1>
     <p class="sub">
       게임 콘텐츠를 공부하는 컴퓨터공학과 3학년.<br>
       디테일을 놓치지 않는 눈으로 더 나은 게임 경험을 만들고 싶습니다.
@@ -294,32 +232,32 @@
       <span class="chip">Computer Science</span>
       <span class="chip">QA 지망</span>
       <span class="chip">Unity</span>
-      <span class="chip">완벽주의 + 디테일</span>
+      <span class="chip">완벽주의 · 디테일</span>
     </div>
     <a class="scroll-cue" href="#about">↓ 더 알아보기</a>
   </div>
 </div>
 
-<hr class="divider">
+<hr class="div">
 
 <!-- ABOUT -->
-<div class="wrapper">
+<div class="wrap">
   <section id="about">
     <p class="sec-label">About</p>
-    <h2>나는 이런 사람입니다</h2>
+    <h2>저를 소개합니다</h2>
 
     <div class="card reveal">
       <p>
         조용한 환경에서 혼자 집중할 때 가장 좋은 결과물이 나옵니다.
         완벽주의적 성향과 디테일에 대한 집착이 강점이며,
-        이 두 가지가 QA라는 목표와 자연스럽게 맞닿아 있다고 생각합니다.
+        이 두 가지가 QA와 자연스럽게 맞닿아 있다고 생각합니다.
         어떤 상황에서도 거짓말을 하지 않는 것을 가장 중요한 가치로 여깁니다.
       </p>
     </div>
 
     <div class="card reveal" style="transition-delay:.1s">
       <h3>작업 스타일</h3>
-      <div class="personality-row">
+      <div class="trait-row">
         <span class="trait">⚡ 즉흥적</span>
         <span class="trait">🔍 디테일 집착</span>
         <span class="trait">✅ 완벽주의</span>
@@ -327,18 +265,13 @@
         <span class="trait">🤝 팀 적응 가능</span>
       </div>
     </div>
-
-    <blockquote class="reveal" style="transition-delay:.2s">
-      "두려움 없이 나다운 것에 집중한다"<br>
-      — 《미움받을 용기》에서 영향을 받은 삶의 태도
-    </blockquote>
   </section>
 </div>
 
-<hr class="divider">
+<hr class="div">
 
 <!-- SKILLS -->
-<div class="wrapper">
+<div class="wrap">
   <section id="skills">
     <p class="sec-label">Skills</p>
     <h2>보유 기술</h2>
@@ -350,20 +283,28 @@
           <li>Adobe Illustrator</li>
         </ul>
       </div>
-      <div class="skill-box reveal" style="transition-delay:.08s">
+      <div class="skill-box reveal" style="transition-delay:.07s">
         <h4>게임 엔진</h4>
         <ul>
           <li>Unity</li>
         </ul>
       </div>
-      <div class="skill-box reveal" style="transition-delay:.16s">
+      <div class="skill-box reveal" style="transition-delay:.14s">
         <h4>협업 도구</h4>
         <ul>
           <li>Git</li>
+          <li>GitHub Pages</li>
           <li>Notion</li>
         </ul>
       </div>
-      <div class="skill-box reveal" style="transition-delay:.24s">
+      <div class="skill-box reveal" style="transition-delay:.21s">
+        <h4>AI & 생산성</h4>
+        <ul>
+          <li>Claude Code</li>
+          <li>Obsidian</li>
+        </ul>
+      </div>
+      <div class="skill-box reveal" style="transition-delay:.28s">
         <h4>외국어</h4>
         <ul>
           <li>일본어</li>
@@ -374,11 +315,11 @@
   </section>
 </div>
 
-<hr class="divider">
+<hr class="div">
 
-<!-- PROJECT -->
-<div class="wrapper">
-  <section id="project">
+<!-- PROJECTS -->
+<div class="wrap">
+  <section id="projects">
     <p class="sec-label">Projects</p>
     <h2>프로젝트</h2>
 
@@ -389,8 +330,7 @@
         Unity 엔진 기반 게임 팀 프로젝트. 기획과 디자인을 담당했습니다.
         팀원들이 소통에 적극적이지 않은 환경이었지만,
         정기 회의와 다수결 방식으로 의사결정 구조를 만들어 프로젝트를 완성하고 배포까지 마쳤습니다.
-        가장 오랜 시간을 쏟은 프로젝트인 만큼 아쉬움도 가장 많이 남아,
-        지금 다시 만든다면 더 잘할 수 있겠다는 생각이 드는 작업입니다.
+        가장 오랜 시간을 쏟은 프로젝트인 만큼, 다음엔 더 잘할 수 있다는 동기가 된 작업입니다.
       </p>
       <div class="chip-row">
         <span class="chip">Unity</span>
@@ -401,7 +341,7 @@
       </div>
     </div>
 
-    <div class="card reveal" style="transition-delay:.12s; border-style: dashed; opacity:.65;">
+    <div class="card reveal" style="transition-delay:.12s; border-style:dashed; opacity:.6;">
       <div class="card-meta">준비 중</div>
       <h3>Next Project</h3>
       <p>다음 프로젝트를 구상 중입니다.</p>
@@ -409,10 +349,10 @@
   </section>
 </div>
 
-<hr class="divider">
+<hr class="div">
 
 <!-- EXPERIENCE -->
-<div class="wrapper">
+<div class="wrap">
   <section id="experience">
     <p class="sec-label">Experience</p>
     <h2>경험</h2>
@@ -427,20 +367,46 @@
       </div>
       <div class="tl-item reveal" style="transition-delay:.2s">
         <h3>해외 봉사 (교회 선교)</h3>
-        <p>해외 선교 활동에 참여해 다양한 문화권의 사람들과 함께 일한 경험이 있습니다.</p>
-      </div>
-      <div class="tl-item reveal" style="transition-delay:.3s">
-        <h3>봉사활동</h3>
-        <p>국내 봉사활동에 참여한 경험이 있습니다.</p>
+        <p>해외 선교 활동에 참여해 다양한 문화권의 사람들과 함께 활동한 경험이 있습니다.</p>
       </div>
     </div>
   </section>
 </div>
 
-<hr class="divider">
+<hr class="div">
 
-<!-- VALUES & INTERESTS -->
-<div class="wrapper">
+<!-- EDUCATION -->
+<div class="wrap">
+  <section id="education">
+    <p class="sec-label">Education & Workshop</p>
+    <h2>교육 & 특강</h2>
+
+    <div class="card reveal">
+      <div class="card-meta">2026.06.24 – 2026.07.07 · 유한대</div>
+      <h3>바이브 코딩 방학 특강</h3>
+      <p>
+        방학 중 참여한 코딩 특강으로, AI 도구와 현대적인 개발 워크플로우를 실습했습니다.
+        이 포트폴리오 페이지도 본 특강에서 직접 제작한 결과물입니다.
+      </p>
+      <div class="chip-row">
+        <span class="chip">GitHub Pages 배포</span>
+        <span class="chip">Claude Code</span>
+        <span class="chip">Obsidian</span>
+      </div>
+    </div>
+
+    <div class="card reveal" style="transition-delay:.1s">
+      <div class="card-meta">컴퓨터공학과 게임콘텐츠전공 · 3학년</div>
+      <h3>대학 전공</h3>
+      <p>성실히 배우는 것을 가장 중요한 학업 태도로 삼고 있습니다.</p>
+    </div>
+  </section>
+</div>
+
+<hr class="div">
+
+<!-- VALUES -->
+<div class="wrap">
   <section id="values">
     <p class="sec-label">Values & Interests</p>
     <h2>가치관 & 관심사</h2>
@@ -450,36 +416,36 @@
         <h4>정직함</h4>
         <p>어떤 상황에서도 거짓말을 하지 않는 것을 가장 중요한 가치로 삼고 있습니다.</p>
       </div>
-      <div class="value-box reveal" style="transition-delay:.1s">
+      <div class="value-box reveal" style="transition-delay:.08s">
         <div class="icon">🎮</div>
         <h4>게임</h4>
         <p>게임을 즐기며, 게임의 세계관과 설정을 파고드는 것을 특히 좋아합니다.</p>
       </div>
-      <div class="value-box reveal" style="transition-delay:.2s">
+      <div class="value-box reveal" style="transition-delay:.16s">
         <div class="icon">🎲</div>
         <h4>보드게임</h4>
         <p>보드게임에 관심이 많습니다. 게임 시스템과 규칙 구조에 흥미를 느낍니다.</p>
       </div>
-      <div class="value-box reveal" style="transition-delay:.3s">
+      <div class="value-box reveal" style="transition-delay:.24s">
         <div class="icon">📖</div>
         <h4>독서 & 탐구</h4>
-        <p>소설을 즐겨 읽고, 게임 설정과 세계관을 찾아보는 시간을 좋아합니다.</p>
+        <p>소설을 즐겨 읽고, 게임 설정과 세계관 자료를 찾아보는 시간을 좋아합니다.</p>
       </div>
     </div>
   </section>
 </div>
 
-<hr class="divider">
+<hr class="div">
 
 <!-- GOALS -->
-<div class="wrapper">
+<div class="wrap">
   <section id="goals">
     <p class="sec-label">Goals</p>
     <h2>목표</h2>
 
     <div class="goal-hero reveal">
-      <div class="big-icon">🔍</div>
-      <h3>게임 QA 전문가가 되고 싶습니다</h3>
+      <div class="big-icon">🎮🔍</div>
+      <h3>게임 QA 전문가를 꿈꿉니다</h3>
       <p>
         완벽주의적 성향과 디테일을 놓치지 않는 집중력을 살려,
         게임의 품질을 지키는 QA 직무에서 일하고 싶습니다.
@@ -494,8 +460,8 @@
       </div>
       <div class="card reveal" style="transition-delay:.2s">
         <div class="card-meta">장기 비전</div>
-        <h3>업계 전문가</h3>
-        <p>게임에 대한 깊은 이해를 바탕으로, 신뢰받는 QA 전문가로 성장하고 싶습니다.</p>
+        <h3>게임 업계 전문가</h3>
+        <p>게임에 대한 깊은 이해를 바탕으로, 업계에서 신뢰받는 전문가로 성장하고 싶습니다.</p>
       </div>
     </div>
   </section>
@@ -503,18 +469,15 @@
 
 <!-- FOOTER -->
 <footer>
-  <strong>오리외꽉꽉</strong> · 컴퓨터공학과 게임콘텐츠전공
-  <span>Made with HTML &amp; CSS · No personal information included</span>
+  <strong>강인표</strong> · 컴퓨터공학과 게임콘텐츠전공
+  <small>Made during 바이브 코딩 방학 특강 (유한대, 2026)</small>
 </footer>
 
 <script>
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (e.isIntersecting) e.target.classList.add('visible');
-    });
-  }, { threshold: 0.12 });
-
-  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 </script>
 </body>
 </html>
